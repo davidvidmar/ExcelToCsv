@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B2C4BF61-3E92-4C8D-8BDA-6D8EDA1E559B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ExcelReader</RootNamespace>
-    <AssemblyName>ExcelReader</AssemblyName>
+    <RootNamespace>DavidVidmar.ExcelToCsv</RootNamespace>
+    <AssemblyName>ExcelToCsv</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

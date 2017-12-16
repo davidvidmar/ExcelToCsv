@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelReader", "ExcelReader.csproj", "{B2C4BF61-3E92-4C8D-8BDA-6D8EDA1E559B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelToCsv", "ExcelToCsv.csproj", "{B2C4BF61-3E92-4C8D-8BDA-6D8EDA1E559B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
