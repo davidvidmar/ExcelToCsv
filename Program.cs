@@ -27,28 +27,44 @@ namespace ExcelReader
 
             var outFile = Path.ChangeExtension(inFile, ".csv");
             var sheet = 0;
+            var filter = "";
 
             if (args.Length > 1)
                 for (int i = 1; i < args.Length; i++)
                 {
                     if (args[i].ToLower().StartsWith("/sheet:"))
                     {
-                        Int32.TryParse(args[1].Substring("/sheet:".Length), out sheet);
+                        Int32.TryParse(args[i].Substring("/sheet:".Length), out sheet);
                     }
                     if (args[i].ToLower().StartsWith("/output:"))
                     {
-                        outFile = args[1].Substring("/output:".Length);
+                        outFile = args[i].Substring("/output:".Length);
+                    }
+                    if (args[i].ToLower().StartsWith("/filter:"))
+                    {
+                        filter = args[i].Substring("/filter:".Length);
                     }
                 }
 
             var sb = new StringBuilder();
-            using (var stream = File.Open(inFile, FileMode.Open, FileAccess.Read))
+            using (var stream = File.OpenRead(inFile))
             {
                 using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
                     var result = reader.AsDataSet();
 
-                    foreach (DataRow row in result.Tables[sheet].Rows)
+                    DataRowCollection rows;
+                    if (filter == null)
+                    {
+                        rows = result.Tables[sheet].Rows;
+                    }
+                    else
+                    {
+                        result.Tables[sheet].DefaultView.RowFilter = filter;
+                        rows = (result.Tables[sheet].DefaultView).ToTable().Rows;
+                    }
+
+                    foreach (DataRow row in rows)
                     {
                         foreach (var item in row.ItemArray)
                             sb.Append(item.ToString() + "\t");
@@ -59,7 +75,7 @@ namespace ExcelReader
 
             try
             {
-                File.WriteAllText(outFile, sb.ToString());
+                File.WriteAllText(outFile, sb.ToString(), Encoding.GetEncoding("Windows-1250"));
             }
             catch (Exception ex)
             {
